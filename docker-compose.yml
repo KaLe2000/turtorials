@@ -1,0 +1,99 @@
+version: '3.7'
+
+services:
+
+  nginx:
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    container_name: '${PROJECT_NAME}-nginx'
+    working_dir: /var/www
+    restart: always
+    volumes:
+      - ./public:/var/www/public
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - '80:80'
+    depends_on:
+      - php
+      - rabbitMq
+      - mysql
+#      - postgres
+
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+      args:
+        XDEBUG_PORT: ${XDEBUG_PORT:-9001}
+        USER_UID: ${USER_UID:-1000}
+        USER_NAME: ${USER_NAME:-dockeruser}
+    container_name: '${PROJECT_NAME}-php'
+    working_dir: /var/www
+    restart: always
+    volumes:
+      - .:/var/www
+    environment:
+      DOCKER_UID: 1000
+      DOCKER_GID: 1000
+      XDEBUG_CONFIG: 'client_host=172.17.0.1 client_port=9001'
+      XDEBUG_MODE: 'debug'
+      PHP_IDE_CONFIG: 'serverName=localhost' # your test domain
+
+  redis:
+    image: redis:5.0.8-alpine
+    container_name: '${PROJECT_NAME}-redis'
+    expose:
+      - 6379
+
+  rabbitMq:
+    image: rabbitmq:3.8.9-management
+    container_name: '${PROJECT_NAME}-rabbit'
+    hostname: rabbitMq
+    environment:
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+    ports:
+      - "5671:5671" # standard AMQP port
+      - "5672:5672"
+      - "15671:15671"
+      - "15672:15672" # HTTP management ui
+
+  supervisor:
+    build:
+      context: .
+      dockerfile: docker/supervisor/Dockerfile
+      args:
+        USER_UID: ${USER_UID:-1000}
+        USER_NAME: ${USER_NAME:-dockeruser}
+    container_name: '${PROJECT_NAME}-supervisor'
+    volumes:
+      - .:/var/www
+
+  mysql:
+    image: mysql:latest
+    container_name: '${PROJECT_NAME}-mysql'
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+
+#  postgres:
+#    image: postgres:latest
+#    container_name: '${PROJECT_NAME}-postgres'
+#    restart: always
+#    environment:
+#      - POSTGRES_USER=${DB_USERNAME}
+#      - POSTGRES_PASSWORD=${DB_PASSWORD}
+#      - POSTGRES_DB=${DB_DATABASE}
+#      - POSTGRES_PORT=${DB_PORT}
+#    ports:
+#      - '5432:5432'
+#    volumes:
+#      - ./docker/postgres:/var/lib/postgres
