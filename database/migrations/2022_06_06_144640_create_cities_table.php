@@ -13,7 +13,7 @@ return new class extends Migration
         Schema::create('cities', static function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->jsonb('raw');
+            $table->jsonb('raw')->nullable();
             $table->timestamps();
         });
     }
