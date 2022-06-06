@@ -12,6 +12,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public const TYPE_STUDENT = 'student';
+    public const TYPE_TEACHER = 'teacher';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,6 +22,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'type',
         'email',
         'password',
     ];
