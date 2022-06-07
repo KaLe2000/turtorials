@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Models\Discipline;
+use App\Models\Course;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Migrations\Migration;
 
@@ -10,15 +10,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        \DB::table('disciplines')->insert([
+        \DB::table('courses')->insert([
             [
-                'id' => Discipline::SUBJECT_MATH_ID,
+                'id' => Course::SUBJECT_MATH_ID,
                 'name' => 'Математика',
                 'created_at' => CarbonImmutable::now(),
                 'updated_at' => CarbonImmutable::now(),
             ],
             [
-                'id' => Discipline::SUBJECT_ENG_ID,
+                'id' => Course::SUBJECT_ENG_ID,
                 'name' => 'Английский',
                 'created_at' => CarbonImmutable::now(),
                 'updated_at' => CarbonImmutable::now(),
@@ -28,8 +28,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        \DB::table('disciplines')
-            ->whereIn('id', [Discipline::SUBJECT_MATH_ID, Discipline::SUBJECT_ENG_ID])
+        \DB::table('courses')
+            ->whereIn('id', [Course::SUBJECT_MATH_ID, Course::SUBJECT_ENG_ID])
             ->delete();
     }
 };

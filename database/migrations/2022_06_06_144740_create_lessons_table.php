@@ -21,13 +21,13 @@ return new class extends Migration
             $table->string('description');
             $table->string('image');
             $table->string('status');
-            $table->unsignedBigInteger('teacher_discipline_id');
+            $table->unsignedBigInteger('teacher_course_id');
             $table->timestamp('planned_date');
             $table->timestamps();
 
-            $table->foreign('teacher_discipline_id')
+            $table->foreign('teacher_course_id')
                 ->references('id')
-                ->on('teacher_disciplines')
+                ->on('teacher_courses')
                 ->onDelete('cascade');
         });
     }
