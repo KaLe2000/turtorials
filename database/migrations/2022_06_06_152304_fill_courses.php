@@ -14,12 +14,14 @@ return new class extends Migration
             [
                 'id' => Course::SUBJECT_MATH_ID,
                 'name' => 'Математика',
+                'slug' => 'math',
                 'created_at' => CarbonImmutable::now(),
                 'updated_at' => CarbonImmutable::now(),
             ],
             [
                 'id' => Course::SUBJECT_ENG_ID,
                 'name' => 'Английский',
+                'slug' => 'eng',
                 'created_at' => CarbonImmutable::now(),
                 'updated_at' => CarbonImmutable::now(),
             ],
