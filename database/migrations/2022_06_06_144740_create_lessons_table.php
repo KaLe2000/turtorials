@@ -8,26 +8,25 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up(): void
     {
-        Schema::create('lessons', function (Blueprint $table) {
+        Schema::create('lessons', static function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->string('image');
             $table->string('status');
-            $table->unsignedBigInteger('teacher_course_id');
             $table->timestamp('planned_date');
+            $table->unsignedBigInteger('course_id');
+            $table->unsignedBigInteger('city_id');
             $table->timestamps();
 
-            $table->foreign('teacher_course_id')
+            $table->foreign('course_id')
                 ->references('id')
-                ->on('teacher_courses')
+                ->on('courses')
+                ->onDelete('cascade');
+            $table->foreign('city_id')
+                ->references('id')
+                ->on('cities')
                 ->onDelete('cascade');
         });
     }

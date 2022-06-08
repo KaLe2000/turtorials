@@ -13,4 +13,14 @@ class Course extends Model
     public const SUBJECT_ENG_ID = 2;
 
     protected $fillable = ['name'];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    public function image(): \Illuminate\Database\Eloquent\Relations\MorphOne
+    {
+        return $this->morphOne(Image::class, 'entity');
+    }
 }
