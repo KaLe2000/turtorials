@@ -16,10 +16,15 @@ return new class extends Migration
             $table->string('description');
             $table->string('status');
             $table->timestamp('planned_date');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('course_id');
             $table->unsignedBigInteger('city_id');
             $table->timestamps();
 
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
             $table->foreign('course_id')
                 ->references('id')
                 ->on('courses')
