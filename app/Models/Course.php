@@ -19,6 +19,11 @@ class Course extends Model
         return 'slug';
     }
 
+    public function lessons(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Lesson::class);
+    }
+
     public function image(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne(Image::class, 'entity');

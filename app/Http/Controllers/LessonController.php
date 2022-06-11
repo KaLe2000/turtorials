@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class LessonController extends Controller
 {
+    public function show(Course $course, Lesson $lesson)
+    {
+        return view('cabinet.lesson.index', [
+            'course' => $course,
+            'lesson' => $lesson,
+        ]);
+    }
+
     public function create(Course $course)
     {
         return view('teacher.createLesson', [
@@ -30,11 +38,11 @@ class LessonController extends Controller
             $lesson->save();
 
             $file = $request->file('image');
-            $file->store($file->getClientOriginalName());
+            $path = $file->storeAs('public/images', $file->getClientOriginalName());
 
             $image = new Image();
             $image->name = $file->getClientOriginalName();
-            $image->path = $file->getPath();
+            $image->path = $path;
             $image->entity_id = $lesson->id;
             $image->entity_type = $lesson::class;
 
@@ -43,6 +51,22 @@ class LessonController extends Controller
             dd($request->all(), $exception);
         }
 
-        dd($course, $request->files);
+        return redirect(route('course.show', $course));
+    }
+
+    public function start(Course $course, Lesson $lesson)
+    {
+        $lesson->status = 'in_process';
+        $lesson->save();
+
+        return redirect()->back();
+    }
+
+    public function complete(Course $course, Lesson $lesson)
+    {
+        $lesson->status = 'completed';
+        $lesson->save();
+
+        return redirect()->back();
     }
 }

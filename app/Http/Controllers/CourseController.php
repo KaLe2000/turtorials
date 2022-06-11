@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
+
+    public function show(Course $course)
+    {
+        return view('cabinet.course.index', [
+            'course' => $course,
+            'lessons' => $course->lessons,
+        ]);
+    }
+
     public function create()
     {
         return view('teacher.createCourse');

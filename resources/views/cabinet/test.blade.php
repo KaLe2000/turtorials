@@ -7,9 +7,8 @@
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white border-b border-gray-200">
-            @foreach($courses as $course)
-                <a href="{{ route('course.show', $course) }}">{{ $course->name }}</a><br>
-            @endforeach
+            <img src="{{ asset('images/123.jpg') }}" alt="">
+            <img src="{{ asset('images/ysKP2dWepRfryPzS6nDcqFFQSNTfpF0fE5tG4XlN.png') }}" alt="">
         </div>
     </div>
 </x-app-layout>
