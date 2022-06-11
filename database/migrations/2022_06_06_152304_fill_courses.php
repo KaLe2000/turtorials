@@ -12,14 +12,14 @@ return new class extends Migration
     {
         \DB::table('courses')->insert([
             [
-                'id' => Course::SUBJECT_MATH_ID,
+                'id' => Course::COURSE_MATH,
                 'name' => 'Математика',
                 'slug' => 'math',
                 'created_at' => CarbonImmutable::now(),
                 'updated_at' => CarbonImmutable::now(),
             ],
             [
-                'id' => Course::SUBJECT_ENG_ID,
+                'id' => Course::COURSE_ENG,
                 'name' => 'Английский',
                 'slug' => 'eng',
                 'created_at' => CarbonImmutable::now(),
@@ -31,7 +31,7 @@ return new class extends Migration
     public function down(): void
     {
         \DB::table('courses')
-            ->whereIn('id', [Course::SUBJECT_MATH_ID, Course::SUBJECT_ENG_ID])
+            ->whereIn('id', [Course::COURSE_MATH, Course::COURSE_ENG])
             ->delete();
     }
 };
