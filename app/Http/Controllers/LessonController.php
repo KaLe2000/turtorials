@@ -32,6 +32,7 @@ class LessonController extends Controller
             $lesson->description = $request->description;
             $lesson->status = 'initial';
             $lesson->planned_date = $request->date;
+            $lesson->user_id = \Auth::user()->id;
             $lesson->course_id = $course->id;
             $lesson->city_id = \Auth::user()->city_id;
 

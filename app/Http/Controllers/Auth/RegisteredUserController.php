@@ -1,16 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\StoreUserRequest;
+use App\Models\City;
 use App\Models\User;
+use App\Process\UserProcess;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
 {
@@ -19,7 +20,7 @@ class RegisteredUserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(): \Illuminate\View\View
     {
         return view('auth.register', [
             'types' => [
@@ -32,27 +33,20 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param StoreUserRequest $request
+     * @param UserProcess $userProcess
      * @return \Illuminate\Http\RedirectResponse
      *
-     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request, UserProcess $userProcess): \Illuminate\Http\RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'type' => ['required', 'string', Rule::in([User::TYPE_STUDENT, User::TYPE_TEACHER])],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'type' => $request->type,
-            'city_id' => 1,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $user = $userProcess->create(
+            City::find(City::CITY_KEMEROVO_ID),
+            $request->getName(),
+            $request->getType(),
+            $request->getEmail(),
+            $request->getPassword(),
+        );
 
         event(new Registered($user));
 

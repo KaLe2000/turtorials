@@ -94,4 +94,9 @@ class User extends Authenticatable
     {
         return $this->morphOne(Image::class, 'entity');
     }
+
+    public function isTeacher(): bool
+    {
+        return $this->type === self::TYPE_TEACHER;
+    }
 }

@@ -7,7 +7,12 @@
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white border-b border-gray-200">
-            {{ $lesson->description }}<br>
+            {{ $lesson->description }}<br><br>
+            <form action="{{ route('lesson.sign', $lesson) }}" method="POST">
+                @csrf
+                <input type="submit" value="Sign up Lesson">
+            </form>
+            <br>
             <form action="{{ route('lesson.start', ['course' => $course,'lesson' => $lesson]) }}" method="POST">
                 @csrf
                 <input type="submit" value="Start Lesson">

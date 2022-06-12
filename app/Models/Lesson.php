@@ -35,6 +35,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Lesson whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Lesson whereUserId($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\Course $course
  */
 class Lesson extends Model
 {
@@ -43,9 +44,15 @@ class Lesson extends Model
     public const STATUS_INITIAL = 'initial';
     public const STATUS_IN_PROCESS = 'in_process';
     public const STATUS_COMPLETED = 'complete';
+    public const STATUS_CLOSED = 'closed';
 
     public function image(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne(Image::class, 'entity');
+    }
+
+    public function course(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Course::class);
     }
 }

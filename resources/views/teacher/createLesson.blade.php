@@ -7,7 +7,7 @@
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white border-b border-gray-200">
-            <form action="{{ route('lesson.store', $course->slug) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('lesson.store', $course) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="text" value="" placeholder="Lesson Name" name="name">
                 <input type="text" value="" placeholder="Lesson Description" name="description">

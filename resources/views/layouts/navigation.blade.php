@@ -33,6 +33,9 @@
                 </x-slot>
 
                 <x-slot name="content">
+                    <x-dropdown-link :href="route('cashFlow.create', Auth::user())">
+                        {{ __('Пополнить баланс') }}
+                    </x-dropdown-link>
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
