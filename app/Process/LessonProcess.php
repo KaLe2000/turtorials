@@ -22,7 +22,7 @@ class LessonProcess
         $lesson->name = $name;
         $lesson->description = $description;
         $lesson->status = Lesson::STATUS_INITIAL;
-        $lesson->planned_date = $planned_date;
+        $lesson->planned_date = $planned_date->toDateString();
         $lesson->user_id = $user->id;
         $lesson->course_id = $course->id;
         $lesson->city_id = $user->city_id;

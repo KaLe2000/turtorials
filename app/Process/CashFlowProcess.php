@@ -18,24 +18,16 @@ class CashFlowProcess
         float $amount,
         ?Lesson $lesson = null
     ): CashFlow {
-        try {
-            \DB::beginTransaction();
-
-            $flow = new CashFlow();
-            $flow->user_id = $user->id;
-            $flow->amount = $amount;
-            $flow->lesson_id = $lesson?->id;
-            $flow->save();
-
-            $user->balance += $amount;
-            $user->save();
-
-            \DB::commit();
-        } catch (\Throwable $e) {
-            \DB::rollBack();
-
-            throw $e;
+        $flow = new CashFlow();
+        $flow->user_id = $user->id;
+        $flow->amount = $amount;
+        $flow->status = CashFlow::STATUS_COMPLETED;
+        if ($lesson !== null) {
+            $flow->status = CashFlow::STATUS_RESERVED;
+            $flow->lesson_id = $lesson->id;
         }
+
+        $flow->save();
 
         return $flow;
     }
