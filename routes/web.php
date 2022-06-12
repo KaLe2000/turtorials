@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(static function() {
     Route::get('/course/{course}/lesson/create', [LessonController::class, 'create'])
         ->name('lesson.create');
     Route::post('/course/{course}/lesson/create', [LessonController::class, 'store'])
-        ->name('lesson.store');
+        ->name('lesson.create');
     Route::get('/course/{course}/lesson/{lesson}', [LessonController::class, 'show'])
         ->name('lesson.show');
     Route::post('/course/{course}/lesson/{lesson}/start', [LessonController::class, 'start'])
@@ -50,6 +50,10 @@ Route::middleware(['auth'])->group(static function() {
         ->name('cashFlow.create');
     Route::post('/user/{user}/cash_flow/create', [CashFlowController::class, 'store'])
         ->name('cashFlow.store');
+    Route::post('/course/{course}/lesson/{lesson}/start', [LessonController::class, 'start'])
+        ->name('lesson.start');
+    Route::post('/course/{course}/lesson/{lesson}/complete', [LessonController::class, 'complete'])
+        ->name('lesson.complete');
 });
 
 Route::get('/dev/test', [\App\Http\Controllers\TestController::class, 'index']);
