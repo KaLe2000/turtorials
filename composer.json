@@ -12,7 +12,7 @@
         "laravel/tinker": "^2.7",
         "php-amqplib/php-amqplib": "^3.2",
         "predis/predis": "^1.1",
-        "talovskiy/simple-geo-ip": "^0.1.1"
+        "talovskiy/simple-geo-ip": "^0.2.1"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",

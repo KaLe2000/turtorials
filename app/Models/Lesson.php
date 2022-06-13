@@ -41,9 +41,7 @@ class Lesson extends Model
 {
     use HasFactory;
 
-    public const STATUS_INITIAL = 'initial';
-    public const STATUS_IN_PROCESS = 'in_process';
-    public const STATUS_COMPLETED = 'complete';
+    public const STATUS_OPEN = 'open';
     public const STATUS_CLOSED = 'closed';
 
     public function image(): \Illuminate\Database\Eloquent\Relations\MorphOne

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Image;
 use App\Models\Lesson;
+use App\Process\LessonProcess;
 use Illuminate\Http\Request;
 
 class LessonController extends Controller
@@ -24,19 +25,15 @@ class LessonController extends Controller
         ]);
     }
 
-    public function store(Course $course, Request $request)
+    public function store(Course $course, Request $request, LessonProcess $lessonProcess)
     {
         try {
-            $lesson = new Lesson();
-            $lesson->name = $request->name;
-            $lesson->description = $request->description;
-            $lesson->status = 'initial';
-            $lesson->planned_date = $request->date;
-            $lesson->user_id = \Auth::user()->id;
-            $lesson->course_id = $course->id;
-            $lesson->city_id = \Auth::user()->city_id;
-
-            $lesson->save();
+            $lesson = $lessonProcess->create(
+                \Auth::user(),
+                $course,
+                $request->name,
+                $request->description
+            );
 
             $file = $request->file('image');
             $path = $file->storeAs('public/images', $file->getClientOriginalName());

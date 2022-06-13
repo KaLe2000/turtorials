@@ -6,8 +6,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\StoreUserRequest;
-use App\Models\City;
 use App\Models\User;
+use App\Process\CityProcess;
 use App\Process\UserProcess;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -35,13 +35,13 @@ class RegisteredUserController extends Controller
      *
      * @param StoreUserRequest $request
      * @param UserProcess $userProcess
+     * @param CityProcess $cityProcess
      * @return \Illuminate\Http\RedirectResponse
-     *
      */
-    public function store(StoreUserRequest $request, UserProcess $userProcess): \Illuminate\Http\RedirectResponse
+    public function store(StoreUserRequest $request, UserProcess $userProcess, CityProcess $cityProcess): \Illuminate\Http\RedirectResponse
     {
         $user = $userProcess->create(
-            City::find(City::CITY_KEMEROVO_ID),
+            $cityProcess->findCityByIp(),
             $request->getName(),
             $request->getType(),
             $request->getEmail(),

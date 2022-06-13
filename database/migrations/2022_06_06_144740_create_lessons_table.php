@@ -15,7 +15,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('status');
-            $table->timestamp('planned_date');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('course_id');
             $table->unsignedBigInteger('city_id');

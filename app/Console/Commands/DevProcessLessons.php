@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Process\CashFlowProcess;
 use App\Process\LessonProcess;
 use Illuminate\Console\Command;
-use Illuminate\Support\Carbon;
 
 class DevProcessLessons extends Command
 {
@@ -38,8 +37,7 @@ class DevProcessLessons extends Command
                 User::find($user_id),
                 Course::find($course_id),
                 'Test Lesson',
-                'This is Test Lesson',
-                Carbon::now()
+                'This is Test Lesson'
             ));
         }
 

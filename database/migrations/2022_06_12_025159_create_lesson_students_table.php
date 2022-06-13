@@ -13,6 +13,8 @@ return new class extends Migration
         Schema::create('lesson_students', static function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('lesson_id');
+            $table->string('status');
+            $table->timestamp('planned_date');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
