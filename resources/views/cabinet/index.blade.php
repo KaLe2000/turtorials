@@ -10,12 +10,11 @@
 
     <div class="flex flex-wrap -mx-3">
         @forelse($courses as $course)
-            <div class="w-1/3 px-3 pb-6 ">
-                <div class="bg-white p-3 rounded shadow">
-                    <h3 class="font-normal text-xl py-4"><a href="{{ route('course.show', $course) }}">{{ $course->name }}</a></h3>
-                    <div class="text-gray-500">{{ $course->description }}</div>
-                </div>
-            </div>
+            <x-card>
+                <x-slot name="name">{{ $course->name }}</x-slot>
+                <x-slot name="link">{{ route('course.show', $course) }}</x-slot>
+                {{ $course->description }}
+            </x-card>
         @empty
             <div>Нет предметов для изучения.</div>
         @endforelse

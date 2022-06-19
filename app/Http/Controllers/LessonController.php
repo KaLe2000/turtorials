@@ -36,11 +36,13 @@ class LessonController extends Controller
             );
 
             $file = $request->file('image');
-            $path = $file->storeAs('public/images', $file->getClientOriginalName());
+            if ($file) {
+                $path = $file->storeAs('public/images', $file->getClientOriginalName());
+            }
 
             $image = new Image();
             $image->name = $file->getClientOriginalName();
-            $image->path = $path;
+            $image->path = $path ?? '';
             $image->entity_id = $lesson->id;
             $image->entity_type = $lesson::class;
 

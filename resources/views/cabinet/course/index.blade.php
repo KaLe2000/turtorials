@@ -1,20 +1,21 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ $course->name }}
+            <a href="{{ route('cabinet') }}">{{ $course->name }}</a>
         </h2>
+        <a href="{{ route('lesson.create', $course) }}">
+            {{ __('Создать урок') }}
+        </a>
     </x-slot>
 
-    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 bg-white border-b border-gray-200">
-            total lessons: {{ $lessons->count() }}<br>
-            @foreach($lessons as $lesson)
-                <a href="{{ route('lesson.show', ['course' => $course,'lesson' => $lesson]) }}">{{ $lesson->name }}</a><br>
-            @endforeach
-        </div>
-        <div class="p-6 bg-white border-b border-gray-200">
-            <a href="{{ route('lesson.create', $course) }}">Create lesson</a><br>
-            <a href="{{ route('cabinet') }}">Return back!</a>
-        </div>
+    <div class="flex flex-wrap -mx-3">
+{{--        total lessons: {{ $lessons->count() }}<br>--}}
+        @foreach($lessons as $lesson)
+            <x-card>
+                <x-slot name="name">{{ $lesson->name }}</x-slot>
+                <x-slot name="link">{{ route('lesson.show', ['course' => $course,'lesson' => $lesson]) }}</x-slot>
+                {{ $lesson->description }}
+            </x-card>
+        @endforeach
     </div>
 </x-app-layout>
