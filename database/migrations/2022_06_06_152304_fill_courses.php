@@ -14,6 +14,7 @@ return new class extends Migration
             [
                 'id' => Course::COURSE_MATH,
                 'name' => 'Математика',
+                'description' => 'Для детей от 3х до 7и лет.',
                 'slug' => 'math',
                 'created_at' => CarbonImmutable::now(),
                 'updated_at' => CarbonImmutable::now(),
@@ -21,6 +22,7 @@ return new class extends Migration
             [
                 'id' => Course::COURSE_ENG,
                 'name' => 'Английский',
+                'description' => 'Для детей от 1о до 7и лет.',
                 'slug' => 'eng',
                 'created_at' => CarbonImmutable::now(),
                 'updated_at' => CarbonImmutable::now(),

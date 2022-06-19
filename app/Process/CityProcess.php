@@ -18,8 +18,11 @@ class CityProcess
 
     public function findCityByIp(): ?City
     {
-        $locationData = $this->service->getData('46.180.151.238')->getRaw();
+        $locationData = $this->service->getData(\config('simple-geo-ip.ip.kemerovo'));
+        if ($locationData !== null) {
+            return City::where('name', $locationData->getRaw()['city']['names']['ru'])->first();
+        }
 
-        return City::where('name', $locationData['city']['names']['ru'])->first();
+        return City::find(City::CITY_KEMEROVO_ID);
     }
 }

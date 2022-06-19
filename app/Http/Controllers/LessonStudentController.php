@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Lesson;
-use App\Models\LessonStudent;
+use App\Process\LessonStudentProcess;
+use Illuminate\Support\Carbon;
 
 class LessonStudentController extends Controller
 {
@@ -14,15 +15,11 @@ class LessonStudentController extends Controller
         return view('student.signUp');
     }
 
-    public function store(Lesson $lesson): \Illuminate\Http\RedirectResponse
+    public function store(Lesson $lesson, LessonStudentProcess $lessonStudentProcess): \Illuminate\Http\RedirectResponse
     {
         // todo check to lesson status & planned_date
         // todo create reserved cashFlow for student & teacher
-        $lessonStudent = new LessonStudent();
-        $lessonStudent->user_id = \Auth::user()->id;
-        $lessonStudent->lesson_id = $lesson->id;
-
-        $lessonStudent->save();
+        $lessonStudent = $lessonStudentProcess->create(\Auth::user(), $lesson, Carbon::now());
 
         return redirect(route('lesson.show', ['course' => $lesson->course,'lesson' => $lesson]));
     }

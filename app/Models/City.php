@@ -32,9 +32,14 @@ class City extends Model
     public const CITY_KEMEROVO_ID = 1;
     public const CITY_NOVOSIBIRSK_ID = 2;
 
-    protected $fillable = ['name', 'raw'];
+    protected $fillable = ['name', 'slug', 'raw'];
 
     protected $casts = [
         'raw' => 'array',
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }

@@ -14,12 +14,14 @@ return new class extends Migration
             [
                 'id' => City::CITY_KEMEROVO_ID,
                 'name' => 'Кемерово',
+                'slug' => 'kemerovo',
                 'created_at' => CarbonImmutable::now(),
                 'updated_at' => CarbonImmutable::now(),
             ],
             [
                 'id' => City::CITY_NOVOSIBIRSK_ID,
                 'name' => 'Новосибирск',
+                'slug' => 'novosibirsk',
                 'created_at' => CarbonImmutable::now(),
                 'updated_at' => CarbonImmutable::now(),
             ],
