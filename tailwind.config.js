@@ -17,8 +17,8 @@ module.exports = {
                 'gray-light': '#f5f6f9',
             },
             boxShadow: {
-                default: '0 0 5px 0 rgba(0, 0, 0, 0.08)',
-            },
+                'default': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
+            }
         },
     },
 

@@ -3,13 +3,12 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <a href="{{ route('cabinet') }}">{{ $course->name }}</a>
         </h2>
-        <a href="{{ route('lesson.create', $course) }}">
+        <a href="{{ route('lesson.create', $course) }}" class="btn-green">
             {{ __('Создать урок') }}
         </a>
     </x-slot>
 
     <div class="flex flex-wrap -mx-3">
-{{--        total lessons: {{ $lessons->count() }}<br>--}}
         @foreach($lessons as $lesson)
             <x-card>
                 <x-slot name="name">{{ $lesson->name }}</x-slot>

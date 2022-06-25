@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .card-shadow {
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.08);
+    }
+    .custom-btn {
+        box-shadow: 0 2px 7px 0 #b8ffb0;
+    }
+    .btn-green {
+        @apply custom-btn bg-green-500 hover:bg-green-700 text-white py-2 px-5 rounded;
+    }
+    .btn-red {
+        @apply bg-red-500 hover:bg-red-700 text-white py-2 px-5 rounded;
+    }
+    .btn-blue {
+        @apply bg-blue-500 hover:bg-blue-700 text-white py-2 px-5 rounded;
+    }
+}

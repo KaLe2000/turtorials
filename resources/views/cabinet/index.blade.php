@@ -8,7 +8,7 @@
         </a>
     </x-slot>
 
-    <div class="flex flex-wrap -mx-3">
+    <div class="lg:flex lg:flex-wrap -mx-3">
         @forelse($courses as $course)
             <x-card>
                 <x-slot name="name">{{ $course->name }}</x-slot>

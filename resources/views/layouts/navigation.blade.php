@@ -6,7 +6,9 @@
             <a href="{{ route('cabinet') }}">
                 <x-application-logo class="block h-16 w-auto fill-current text-gray-600" />
             </a>
-            <span class="ml-2">Turtorials</span>
+            <a href="{{ route('cabinet') }}">
+                <span class="ml-2">Turtorials</span>
+            </a>
         </div>
     </div>
 
@@ -16,7 +18,7 @@
     <!-- Authentication -->
     <form method="POST" action="{{ route('logout') }}">
         @csrf
-        <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
+        <a href="{{ route('logout') }}" class="btn-red" onclick="event.preventDefault(); this.closest('form').submit();">
             {{ __('Выйти') }}
         </a>
     </form>
