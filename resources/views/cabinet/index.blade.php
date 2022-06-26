@@ -3,7 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Кабинет учащегося') }}
         </h2>
-        @include('layouts.header-actions', [
+        @include('layouts.header-actions-' . Auth::user()->type, [
             'user' => Auth::user(),
             'course' => null,
             'lesson' => null,

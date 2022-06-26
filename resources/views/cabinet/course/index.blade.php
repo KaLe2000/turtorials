@@ -3,7 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <a href="{{ route('cabinet') }}">{{ $course->name }}</a>
         </h2>
-        @include('layouts.header-actions', [
+        @include('layouts.header-actions-' . Auth::user()->type, [
             'user' => Auth::user(),
             'course' => $course,
             'lesson' => null,

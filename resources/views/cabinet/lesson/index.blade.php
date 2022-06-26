@@ -1,9 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ $lesson->name }}
+            {{ $lesson->name }}&nbsp;<small class="font-normal">урок ещё не начался</small>
         </h2>
-        @include('layouts.header-actions', [
+        @include('layouts.header-actions-' . Auth::user()->type, [
             'user' => Auth::user(),
             'course' => $course,
             'lesson' => $lesson,
@@ -14,10 +14,11 @@
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
                 <img src="/image/teacher-cam.jpg" alt="teacher">
+                <div>
+                    {{ $lesson->description }}
+                </div>
             </div>
             <div class="p-6 bg-white border-b border-gray-200">
-                {{ $lesson->description }}<br><br>
-                <br>
                 <a href="{{ route('course.show', $course) }}">Return Back!</a>
             </div>
         </div>
@@ -34,5 +35,9 @@
                     </x-button>
                 </div>
             </div>
+        </div>
+        <div id="sidebar">
+            @include('layouts.lesson-sidebar')
+        </div>
     </main>
 </x-app-layout>

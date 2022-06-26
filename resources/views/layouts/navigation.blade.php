@@ -12,8 +12,8 @@
         </div>
     </div>
 
-    <a href="{{ route('cabinet') }}">{{ __('Кабинет') }}</a>
-    <div>{{ Auth::user()->name }}</div>
+    <div><a href="{{ route('cabinet') }}">{{ __('Кабинет') }}</a></div>
+    <div>{{ Auth::user()->name }}&nbsp;<small>Ваш баланс: 0</small></div>
 
     <!-- Authentication -->
     <form method="POST" action="{{ route('logout') }}">
