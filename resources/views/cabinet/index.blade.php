@@ -3,9 +3,11 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Кабинет учащегося') }}
         </h2>
-        <a href="{{ route('cashFlow.create', Auth::user()) }}">
-            {{ __('Пополнить баланс') }}
-        </a>
+        @include('layouts.header-actions', [
+            'user' => Auth::user(),
+            'course' => null,
+            'lesson' => null,
+        ])
     </x-slot>
 
     <div class="lg:flex lg:flex-wrap -mx-3">

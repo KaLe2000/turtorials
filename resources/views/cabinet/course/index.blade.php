@@ -3,9 +3,11 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <a href="{{ route('cabinet') }}">{{ $course->name }}</a>
         </h2>
-        <a href="{{ route('lesson.create', $course) }}" class="btn-green">
-            {{ __('Создать урок') }}
-        </a>
+        @include('layouts.header-actions', [
+            'user' => Auth::user(),
+            'course' => $course,
+            'lesson' => null,
+        ])
     </x-slot>
 
     <div class="flex flex-wrap -mx-3">

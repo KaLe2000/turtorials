@@ -16,13 +16,13 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
-    <body class="font-sans antialiased bg-black gray-light">
+    <body class="font-sans antialiased bg-gray-light gray-light">
         <div class="container mx-auto min-h-screen">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
             <header class="bg-white">
-                <div class="py-6 flex justify-between">
+                <div class="py-6 flex justify-between items-end">
                     {{ $header }}
                 </div>
             </header>

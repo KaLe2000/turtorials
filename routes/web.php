@@ -36,13 +36,13 @@ Route::middleware(['auth'])->group(static function() {
         ->name('lesson.store');
     Route::get('/course/{course}/lesson/{lesson}', [LessonController::class, 'show'])
         ->name('lesson.show');
-    Route::post('/course/{course}/lesson/{lesson}/start', [LessonController::class, '`start'])
+    Route::get('/course/{course}/lesson/{lesson}/start', [LessonController::class, '`start'])
         ->name('lesson.start');
-    Route::post('/course/{course}/lesson/{lesson}/complete', [LessonController::class, 'complete'])
+    Route::get('/course/{course}/lesson/{lesson}/complete', [LessonController::class, 'complete'])
         ->name('lesson.complete');
     Route::post('/lesson/{lesson}/signup', [LessonStudentController::class, 'create'])
         ->name('lesson.signup');
-    Route::post('/lesson/{lesson}/signup', [LessonStudentController::class, 'store'])
+    Route::get('/lesson/{lesson}/signup', [LessonStudentController::class, 'store'])
         ->name('lesson.sign');
 
     // Деньги
