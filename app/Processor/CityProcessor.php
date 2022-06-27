@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Process;
+namespace App\Processor;
 
 use App\Models\City;
 use Talovskiy\SimpleGeoIp\Service\CityService;
 
-class CityProcess
+class CityProcessor
 {
     private CityService $service;
 

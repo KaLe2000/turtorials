@@ -13,6 +13,7 @@
     </div>
 
     <div><a href="{{ route('cabinet') }}">{{ __('Кабинет') }}</a></div>
+    // todo хз как это сделать нормально без api
     <div>{{ Auth::user()->name }}&nbsp;<small>Ваш баланс: 0</small></div>
 
     <!-- Authentication -->

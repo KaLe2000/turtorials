@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Process;
+namespace App\Processor;
 
 use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\User;
 
-class LessonProcess
+class LessonProcessor
 {
     public function create(
         User $user,

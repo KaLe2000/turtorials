@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Process;
+namespace App\Processor;
 
 use App\Models\City;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 
-class UserProcess
+class UserProcessor
 {
     public function create(
         City $city,

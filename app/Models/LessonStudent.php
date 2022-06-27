@@ -32,8 +32,7 @@ class LessonStudent extends Model
 
     public const STATUS_INITIAL = 'initial';
     public const STATUS_IN_PROCESS = 'in_process';
-    public const STATUS_COMPLETED = 'complete';
-    public const STATUS_CLOSED = 'closed';
+    public const STATUS_COMPLETED = 'completed';
 
     public function lesson(): BelongsTo
     {
@@ -44,4 +43,6 @@ class LessonStudent extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // todo state machine here
 }

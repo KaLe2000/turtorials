@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Process\CashFlowProcess;
+use App\Processor\CashFlowProcessor;
 use Illuminate\Http\Request;
 
 class CashFlowController extends Controller
@@ -17,7 +17,7 @@ class CashFlowController extends Controller
         ]);
     }
 
-    public function store(Request $request, User $user, CashFlowProcess $cashFlowProcess)
+    public function store(Request $request, User $user, CashFlowProcessor $cashFlowProcess)
     {
         $cashFlowProcess->create($user, (float) $request->amount);
 

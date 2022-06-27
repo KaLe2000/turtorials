@@ -6,8 +6,8 @@ namespace App\Console\Commands;
 
 use App\Models\Course;
 use App\Models\User;
-use App\Process\CashFlowProcess;
-use App\Process\LessonProcess;
+use App\Processor\CashFlowProcessor;
+use App\Processor\LessonProcessor;
 use Illuminate\Console\Command;
 
 class DevProcessLessons extends Command
@@ -16,7 +16,7 @@ class DevProcessLessons extends Command
 
     protected $description = 'Create default development lessons for test';
 
-    public function handle(LessonProcess $lessonProcess, CashFlowProcess $cashFlowProcess): int
+    public function handle(LessonProcessor $lessonProcess, CashFlowProcessor $cashFlowProcess): int
     {
         $lessons = $this->createLessons($lessonProcess);
         $this->createFlows($cashFlowProcess);
@@ -24,7 +24,7 @@ class DevProcessLessons extends Command
         return 0;
     }
 
-    private function createLessons(LessonProcess $lessonProcess): \Illuminate\Support\Collection
+    private function createLessons(LessonProcessor $lessonProcess): \Illuminate\Support\Collection
     {
         $lessonsFor = [
             [User::DEV_TEACHER_MATH, Course::COURSE_MATH],
@@ -44,7 +44,7 @@ class DevProcessLessons extends Command
         return $lessons;
     }
 
-    private function createFlows(CashFlowProcess $cashFlowProcess): void
+    private function createFlows(CashFlowProcessor $cashFlowProcess): void
     {
         foreach ([User::DEV_STUDENT_MATH, User::DEV_STUDENT_ENG] as $user_id) {
             $cashFlowProcess->create(User::find($user_id), 100);

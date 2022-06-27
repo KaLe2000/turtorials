@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Image;
 use App\Models\Lesson;
-use App\Process\LessonProcess;
+use App\Models\LessonStudent;
+use App\Processor\LessonProcessor;
 use Illuminate\Http\Request;
 
 class LessonController extends Controller
@@ -15,6 +16,9 @@ class LessonController extends Controller
         return view('cabinet.lesson.index', [
             'course' => $course,
             'lesson' => $lesson,
+            'lessonStudent' => LessonStudent::where('user_id', \Auth::id())
+                ->where('lesson_id', $lesson->id)
+                ->first(),
         ]);
     }
 
@@ -25,7 +29,7 @@ class LessonController extends Controller
         ]);
     }
 
-    public function store(Course $course, Request $request, LessonProcess $lessonProcess)
+    public function store(Course $course, Request $request, LessonProcessor $lessonProcess)
     {
         try {
             $lesson = $lessonProcess->create(
@@ -54,6 +58,7 @@ class LessonController extends Controller
         return redirect(route('course.show', $course));
     }
 
+    // todo to open
     public function start(Course $course, Lesson $lesson)
     {
         $lesson->status = 'in_process';
@@ -62,6 +67,7 @@ class LessonController extends Controller
         return redirect()->back();
     }
 
+    // todo to closed
     public function complete(Course $course, Lesson $lesson)
     {
         $lesson->status = 'completed';
