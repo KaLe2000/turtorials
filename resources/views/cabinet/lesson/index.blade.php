@@ -3,6 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ $lesson->name }}&nbsp;<small class="font-normal">урок ещё не начался</small>
         </h2>
+        {{-- todo blade directive isStudent --}}
         @include('layouts.header-actions-' . Auth::user()->type, [
             'user' => Auth::user(),
             'course' => $course,
@@ -13,7 +14,12 @@
     <main class="flex">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
-                <img src="/image/teacher-cam.jpg" alt="teacher">
+{{--                <img src="/image/teacher-cam.jpg" alt="teacher">--}}
+                <div class="camera">
+                    <video id="video">Video stream not available.</video>
+                </div>
+                <canvas id="canvas">
+                </canvas>
                 <div>
                     {{ $lesson->description }}
                 </div>
@@ -36,6 +42,7 @@
                 </div>
             </div>
         </div>
+        {{-- todo teacher sidebar with signed to lesson students --}}
         <div id="sidebar">
             @include('layouts.lesson-sidebar')
         </div>
